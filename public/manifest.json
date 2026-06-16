@@ -1,0 +1,17 @@
+{
+  "name": "상당고 선택과목 AI",
+  "short_name": "과목선택",
+  "description": "상당고등학교 맞춤형 선택과목 설계 지원 AI 앱",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/상당고 로고.png",
+      "sizes": "192x192 512x512 any",
+      "type": "image/png"
+    }
+  ]
+}
