@@ -68,13 +68,15 @@ ${contextText}
     const result = await chat.sendMessage(lastMessage);
     const responseText = result.response.text();
 
-    // 4. Save to DB asynchronously (fire and forget)
-    supabase.from('chat_logs').insert([
+    // 4. Save to DB (반드시 await를 사용해야 Vercel 서버리스 환경에서 프로세스가 죽지 않고 저장이 완료됨)
+    const { error: insertError } = await supabase.from('chat_logs').insert([
       { student_id: studentId, student_name: studentName, role: 'user', content: lastMessage },
       { student_id: studentId, student_name: studentName, role: 'model', content: responseText }
-    ]).then(({error}) => {
-      if (error) console.error("Error saving chat log:", error);
-    });
+    ]);
+    
+    if (insertError) {
+      console.error("Error saving chat log:", insertError);
+    }
 
     return NextResponse.json({ text: responseText });
 
